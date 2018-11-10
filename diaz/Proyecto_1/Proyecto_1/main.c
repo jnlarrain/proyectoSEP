@@ -30,7 +30,7 @@ int punto = 0;
 
 #define  deboncer 10
 
-//INICIO USART
+//INICIO USART (hay que borrarlo eventualmente)
 #define FOSC 16000000 	//clock
 #define BAUD 57600		//ancho de banda que queremos
 #define MYUBRR FOSC/16/BAUD-1	//calculo segun el data sheet
@@ -71,7 +71,7 @@ unsigned char USART_Receive( void )
 	return UDR0;
 }
 
-//FIN USART
+//FIN USART (hay que borrarlo eventualmente)
 
 // The Pin Change Interrupt Request 2 (PCI2) will trigger if any enabled PCINT[23:16] pin toggles. The Pin
 // Change Interrupt Request 1 (PCI1) will trigger if any enabled PCINT[14:8] pin toggles. The Pin Change
@@ -82,6 +82,7 @@ unsigned char USART_Receive( void )
 //agregar bool ocupado para no accionar multiples veces interrupcion!
 ISR(PCINT2_vect) //seccion2 D
 {
+	//INICIO OCUPADO
 	//Debounder in
 	if      (!(PIND & (1<<PIND4))) { presionado = linea + 0;}
 	else if (!(PIND & (1<<PIND5))) { presionado = linea + 1;}
@@ -93,6 +94,7 @@ ISR(PCINT2_vect) //seccion2 D
 
 ISR(PCINT1_vect) //seccion1 C
 {
+	//INICIO OCUPADO
 	//debouncer in
 	if      (!(PINC & (1<<PINC2))) { presionado = linea + 4;}
 	else if (!(PINC & (1<<PINC3))) { presionado = linea + 5;}
@@ -102,14 +104,16 @@ ISR(PCINT1_vect) //seccion1 C
 	//debouncer out
 }
 
-void teclado(void) //interpretacion de seleccion
+void teclado(void) //interpretacion de seleccion, mapea input
 {
 	//presionado es el input
 	//mapear presionado con respectiva entrada en entradas
+	//cambiar orden en este string segun se necesite
 	char entradas[31] = "0123456789.+-*/^qlesctgxpofamdn="; 
 	char ent = entradas[presionado];
-	//calculadora(entrada)
+	//calculadora(entrada); //le pasa la entrada a la calculadora
 	
+	//FIN OCUPADO
 	//MOSTRAR PRESIONADO POR USART (por ahora)
 	char str[2];
 	sprintf(str, "%d", presionado);
@@ -119,7 +123,7 @@ void teclado(void) //interpretacion de seleccion
 	USART_Transmit_char('\n');
 }
 
-void actualizarNumero(float n, char num) //actualiza numero 
+void actualizarNumero(float n, char num) //actualiza numero n con num
 {
 	switch (num){
 		case '0': n = n*10 + 0; break;
@@ -133,12 +137,12 @@ void actualizarNumero(float n, char num) //actualiza numero
 		case '8': n = n*10 + 8; break;
 		case '9': n = n*10 + 9; break;
 		case '.': punto = 1;  break;}
-		
-	if (punto){ n = n/10; }
+	//ver tema del punto	
+	if (punto){ n = n/(10); } //este 10 tiene que ir aumentado (elevado) segun un contador que se resetea cuando punto pasa a 0
 	mostrarNumero(N1);
 }
 
-void calcular1(float n, char op) //opera op con n
+void calcular1(float n, char op) //opera el operador op con un solo numero n y lo guarda en N1
 {
 	switch (op){
 		case 'q': N1 = n; break;  //raiz cuadrada
@@ -155,21 +159,21 @@ void calcular1(float n, char op) //opera op con n
 	USART_Transmit_char('\n');
 }
 
-void calcular2(float n1, float n2, char op) //opera n1 op n2
+void calcular2(float n1, float n2, char op) //opera n1 op n2 y lo guarda en N1
 {
 	switch (op){
 		case '+': N1 = n1 + n2; break;  // +
 		case '-': N1 = n1 - n2; break;  // -
 		case '*': N1 = n1 * n2; break;  // *
 		case '/': N1 = n1 / n2; break;  // /
-		case '^': N1 = n1; break;}   // ^
+		case '^': N1 = n1; break;}   // ^ Falta aca
 	N2 = 0;
 	USART_Transmit_String("calcular N1 y N2 con");
 	USART_Transmit_char(op);
 	USART_Transmit_char('\n');
 }
 
-void mostrarNumero(float num)
+void mostrarNumero(float num) //mustra el numero
 {
 	char str[6];
 	sprintf(str, "%d", num);
@@ -177,7 +181,7 @@ void mostrarNumero(float num)
 	USART_Transmit_char('\n');
 }
 
-void calculadora(char entrada) //estados calculadora
+void calculadora(char entrada) //basado en diagrama estados calculadora
 {
 	switch (estado)
 	{
@@ -342,7 +346,7 @@ void calculadora(char entrada) //estados calculadora
 			//fin
 		}
 		else{
-			//error
+			USART_Transmit_String("Error\n"); //error
 		}
 		break;
 	}
@@ -379,12 +383,13 @@ int main(void)
 	
     while (1) 
     {
-// 		p1
-// 		p2
-// 		p3
-// 		p4
-		char entrada = USART_Receive();
-		calculadora(entrada);
+		p1
+		p2
+		p3
+		p4
+		//para test por usar comentar p1, p2, p3 y p4
+// 		char entrada = USART_Receive();
+// 		calculadora(entrada);
     }
 }
 
