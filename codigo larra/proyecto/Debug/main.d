@@ -20,7 +20,7 @@ main.d main.o: .././main.c \
  d:\programs\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay.h \
  d:\programs\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h \
  d:\programs\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h \
- .././ST7735/st7735.h .././USART/USART.h
+ .././ST7735/st7735.h
 
 d:\programs\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.h:
 
@@ -65,5 +65,3 @@ d:\programs\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util
 d:\programs\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h:
 
 .././ST7735/st7735.h:
-
-.././USART/USART.h:

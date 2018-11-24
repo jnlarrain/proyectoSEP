@@ -8,5 +8,3 @@ SPI\SPI.c
 
 ST7735\st7735.c
 
-USART\USART.c
-

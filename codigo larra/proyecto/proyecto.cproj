@@ -134,6 +134,12 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Grid\Grid.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Grid\Grid.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
@@ -149,17 +155,11 @@
     <Compile Include="ST7735\st7735.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="USART\USART.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="USART\USART.h">
-      <SubType>compile</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Grid" />
     <Folder Include="SPI" />
     <Folder Include="ST7735" />
-    <Folder Include="USART" />
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
 </Project>
