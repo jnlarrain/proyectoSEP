@@ -109,7 +109,7 @@ void teclado(void) //interpretacion de seleccion, mapea input
 	//presionado es el input
 	//mapear presionado con respectiva entrada en entradas
 	//cambiar orden en este string segun se necesite
-	char entradas[31] = "0123456789.+-*/^qlesctgxpofamdn="; 
+	char entradas[31] = "m123456789.+-*/^qlesctgxpofa0dn="; 
 	char ent = entradas[presionado];
 	//calculadora(entrada); //le pasa la entrada a la calculadora
 	

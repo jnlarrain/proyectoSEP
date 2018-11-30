@@ -54,6 +54,17 @@
         </dependencies>
       </framework-data>
     </AsfFrameworkConfig>
+    <custom>
+      <ToolOptions xmlns="">
+        <InterfaceProperties>
+        </InterfaceProperties>
+        <InterfaceName>debugWIRE</InterfaceName>
+      </ToolOptions>
+      <ToolType xmlns="">custom</ToolType>
+      <ToolNumber xmlns="">
+      </ToolNumber>
+      <ToolName xmlns="">Custom Programming Tool</ToolName>
+    </custom>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <ToolchainSettings>
@@ -135,6 +146,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="main.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="teclado.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="teclado.h">
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>

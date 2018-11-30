@@ -99,8 +99,8 @@ void fourth_grid(uint16_t number){
 
 
 
-char get_char(uint8_t number){
-	char data[2];		
-	sprintf(data, "%d", number);
-	return data;	
-}
+// char get_char(uint8_t number){
+// 	char data[2];		
+// 	sprintf(data, "%d", number);
+// 	return data;	
+// }
