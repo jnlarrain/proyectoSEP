@@ -10,7 +10,7 @@
 #define GRID_H_
 
 
-
-
+void first_grid(uint16_t number);
+char get_char(uint8_t number);
 
 #endif /* GRID_H_ */

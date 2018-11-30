@@ -3,15 +3,7 @@
 #ifndef INCFILE1_H_
 #define INCFILE1_H_
 
-static unsigned int linea;
-static unsigned int presionado;
-static unsigned int estado = 0;
 
-static float N1 = 0;
-static float N2 = 0;
-static float M = 0;
-static char operador = '+';
-int punto = 0;
 #define  pi 3
 
 #define neutro _delay_ms(1); PORTC |= (1 << PORTC0) | (1 << PORTC1); PORTD |= (1 << PORTD2) | (1 << PORTC3);
@@ -23,5 +15,6 @@ int punto = 0;
 #define  deboncer 10
 
 
+void Keyboard_init(void);
 
 #endif /* INCFILE1_H_ */
