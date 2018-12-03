@@ -1,16 +1,16 @@
 /*
- * IncFile1.h
+ * Grid.h
  *
- * Created: 11/30/2018 11:09:00 PM
+ * Created: 11/17/2018 3:52:12 AM
  *  Author: jlarr
  */ 
 
 
-#ifndef INCFILE1_H_
-#define INCFILE1_H_
+#ifndef GRID_H_
+#define GRID_H_
+
+char transform(int number);
+void first_grid(float number);
 
 
-
-
-
-#endif /* INCFILE1_H_ */
+#endif /* GRID_H_ */
