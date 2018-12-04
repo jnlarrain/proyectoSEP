@@ -3,11 +3,11 @@ Archive member included to satisfy reference by file (symbol)
 d:/programs/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
                               D:/Programs/Atmel Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega328p/avr5/crtatmega328p.o (exit)
 d:/programs/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_copy_data.o)
-                              Grilla/grilla.o (__do_copy_data)
+                              main.o (__do_copy_data)
 d:/programs/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_clear_bss.o)
                               Grilla/grilla.o (__do_clear_bss)
 d:/programs/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(sprintf.o)
-                              Grilla/grilla.o (sprintf)
+                              teclado.o (sprintf)
 d:/programs/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
                               d:/programs/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(sprintf.o) (vfprintf)
 d:/programs/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strnlen_P.o)
@@ -26,12 +26,7 @@ d:/programs/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/av
 Allocating common symbols
 Common symbol       size              file
 
-old_string3a        0xa               Grilla/grilla.o
 old_string1         0x14              Grilla/grilla.o
-old_string2b        0xa               Grilla/grilla.o
-old_string1b        0xa               Grilla/grilla.o
-old_string2a        0xa               Grilla/grilla.o
-old_string3b        0xa               Grilla/grilla.o
 old_string4         0xa               Grilla/grilla.o
 
 Discarded input sections
@@ -292,7 +287,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000     0x1176
+.text           0x00000000     0x114e
  *(.vectors)
  .vectors       0x00000000       0x68 D:/Programs/Atmel Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega328p/avr5/crtatmega328p.o
                 0x00000000                __vector_default
@@ -384,105 +379,105 @@ END GROUP
                 0x000002cc                . = ALIGN (0x2)
  *(.text.*)
  .text.first_grid
-                0x000002cc       0x8a Grilla/grilla.o
+                0x000002cc       0x76 Grilla/grilla.o
                 0x000002cc                first_grid
  .text.__vector_5
-                0x00000356       0xac main.o
-                0x00000356                __vector_5
+                0x00000342       0xac main.o
+                0x00000342                __vector_5
  .text.__vector_4
-                0x00000402       0xae main.o
-                0x00000402                __vector_4
- .text.main     0x000004b0      0x106 main.o
-                0x000004b0                main
+                0x000003ee       0xae main.o
+                0x000003ee                __vector_4
+ .text.main     0x0000049c       0xec main.o
+                0x0000049c                main
  .text.HardwareReset
-                0x000005b6       0x22 SPI/SPI.o
-                0x000005b6                HardwareReset
- .text.SpiInit  0x000005d8       0x1c SPI/SPI.o
-                0x000005d8                SpiInit
+                0x00000588       0x22 SPI/SPI.o
+                0x00000588                HardwareReset
+ .text.SpiInit  0x000005aa       0x1c SPI/SPI.o
+                0x000005aa                SpiInit
  .text.CommandSend
-                0x000005f4       0x12 SPI/SPI.o
-                0x000005f4                CommandSend
+                0x000005c6       0x12 SPI/SPI.o
+                0x000005c6                CommandSend
  .text.Data8BitsSend
-                0x00000606       0x12 ST7735/st7735.o
-                0x00000606                Data8BitsSend
+                0x000005d8       0x12 ST7735/st7735.o
+                0x000005d8                Data8BitsSend
  .text.Data16BitsSend
-                0x00000618       0x1a ST7735/st7735.o
-                0x00000618                Data16BitsSend
+                0x000005ea       0x1a ST7735/st7735.o
+                0x000005ea                Data16BitsSend
  .text.SendColor565
-                0x00000632       0x2a ST7735/st7735.o
-                0x00000632                SendColor565
+                0x00000604       0x2a ST7735/st7735.o
+                0x00000604                SendColor565
  .text.SetWindow
-                0x0000065c       0x78 ST7735/st7735.o
-                0x0000065c                SetWindow
+                0x0000062e       0x78 ST7735/st7735.o
+                0x0000062e                SetWindow
  .text.SetPosition
-                0x000006d4       0x44 ST7735/st7735.o
-                0x000006d4                SetPosition
+                0x000006a6       0x44 ST7735/st7735.o
+                0x000006a6                SetPosition
  .text.DrawPixel
-                0x00000718       0x20 ST7735/st7735.o
-                0x00000718                DrawPixel
+                0x000006ea       0x20 ST7735/st7735.o
+                0x000006ea                DrawPixel
  .text.DrawChar
-                0x00000738      0x1e2 ST7735/st7735.o
-                0x00000738                DrawChar
+                0x0000070a      0x1e2 ST7735/st7735.o
+                0x0000070a                DrawChar
  .text.DrawString
-                0x0000091a       0x7e ST7735/st7735.o
-                0x0000091a                DrawString
+                0x000008ec       0x7e ST7735/st7735.o
+                0x000008ec                DrawString
  .text.ClearScreen
-                0x00000998       0x22 ST7735/st7735.o
-                0x00000998                ClearScreen
+                0x0000096a       0x22 ST7735/st7735.o
+                0x0000096a                ClearScreen
  .text.UpdateScreen
-                0x000009ba        0x8 ST7735/st7735.o
-                0x000009ba                UpdateScreen
- .text.DelayMs  0x000009c2       0x16 ST7735/st7735.o
-                0x000009c2                DelayMs
+                0x0000098c        0x8 ST7735/st7735.o
+                0x0000098c                UpdateScreen
+ .text.DelayMs  0x00000994       0x16 ST7735/st7735.o
+                0x00000994                DelayMs
  .text.St7735Commands
-                0x000009d8       0x8e ST7735/st7735.o
-                0x000009d8                St7735Commands
+                0x000009aa       0x8e ST7735/st7735.o
+                0x000009aa                St7735Commands
  .text.St7735Init
-                0x00000a66       0x12 ST7735/st7735.o
-                0x00000a66                St7735Init
+                0x00000a38       0x12 ST7735/st7735.o
+                0x00000a38                St7735Init
  .text.tecladoInit
-                0x00000a78       0x50 teclado.o
-                0x00000a78                tecladoInit
+                0x00000a4a       0x50 teclado.o
+                0x00000a4a                tecladoInit
  .text.USART_Transmit_char
-                0x00000ac8       0x10 teclado.o
-                0x00000ac8                USART_Transmit_char
+                0x00000a9a       0x10 teclado.o
+                0x00000a9a                USART_Transmit_char
  .text.USART_Transmit_String
-                0x00000ad8       0x1e teclado.o
-                0x00000ad8                USART_Transmit_String
- .text.mostrar  0x00000af6       0x92 teclado.o
-                0x00000af6                mostrar
+                0x00000aaa       0x1e teclado.o
+                0x00000aaa                USART_Transmit_String
+ .text.mostrar  0x00000ac8       0x98 teclado.o
+                0x00000ac8                mostrar
  .text.USART_Init
-                0x00000b88       0x16 teclado.o
-                0x00000b88                USART_Init
+                0x00000b60       0x16 teclado.o
+                0x00000b60                USART_Init
  .text.avr-libc
-                0x00000b9e       0x44 d:/programs/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(sprintf.o)
-                0x00000b9e                sprintf
+                0x00000b76       0x44 d:/programs/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(sprintf.o)
+                0x00000b76                sprintf
  .text.avr-libc
-                0x00000be2      0x3c2 d:/programs/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
-                0x00000be2                vfprintf
+                0x00000bba      0x3c2 d:/programs/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
+                0x00000bba                vfprintf
  .text.avr-libc
-                0x00000fa4       0x16 d:/programs/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strnlen_P.o)
-                0x00000fa4                strnlen_P
+                0x00000f7c       0x16 d:/programs/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strnlen_P.o)
+                0x00000f7c                strnlen_P
  .text.avr-libc
-                0x00000fba       0x16 d:/programs/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strnlen.o)
-                0x00000fba                strnlen
+                0x00000f92       0x16 d:/programs/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strnlen.o)
+                0x00000f92                strnlen
  .text.avr-libc
-                0x00000fd0       0x78 d:/programs/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(fputc.o)
-                0x00000fd0                fputc
+                0x00000fa8       0x78 d:/programs/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(fputc.o)
+                0x00000fa8                fputc
  .text.avr-libc
-                0x00001048       0xbc d:/programs/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(ultoa_invert.o)
-                0x00001048                __ultoa_invert
+                0x00001020       0xbc d:/programs/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(ultoa_invert.o)
+                0x00001020                __ultoa_invert
  .text.libgcc.prologue
-                0x00001104       0x38 d:/programs/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_prologue.o)
-                0x00001104                __prologue_saves__
+                0x000010dc       0x38 d:/programs/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_prologue.o)
+                0x000010dc                __prologue_saves__
  .text.libgcc.prologue
-                0x0000113c       0x36 d:/programs/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_epilogue.o)
-                0x0000113c                __epilogue_restores__
-                0x00001172                . = ALIGN (0x2)
+                0x00001114       0x36 d:/programs/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_epilogue.o)
+                0x00001114                __epilogue_restores__
+                0x0000114a                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00001172        0x0 d:/programs/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
-                0x00001172                _exit
-                0x00001172                exit
+ .fini9         0x0000114a        0x0 d:/programs/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+                0x0000114a                _exit
+                0x0000114a                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -501,11 +496,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00001172        0x4 d:/programs/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ .fini0         0x0000114a        0x4 d:/programs/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x00001176                _etext = .
+                0x0000114e                _etext = .
 
-.data           0x00800100       0x42 load address 0x00001176
+.data           0x00800100       0x3e load address 0x0000114e
                 0x00800100                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -514,49 +509,43 @@ END GROUP
  .rodata        0x00800100       0x21 teclado.o
  *(.rodata*)
  .rodata.str1.1
-                0x00800121        0x4 Grilla/grilla.o
+                0x00800121       0x15 main.o
  .rodata.str1.1
-                0x00800125       0x15 main.o
- .rodata.str1.1
-                0x0080013a        0x8 teclado.o
+                0x00800136        0x8 teclado.o
  *(.gnu.linkonce.r*)
-                0x00800142                . = ALIGN (0x2)
-                0x00800142                _edata = .
-                0x00800142                PROVIDE (__data_end, .)
+                0x0080013e                . = ALIGN (0x2)
+                0x0080013e                _edata = .
+                0x0080013e                PROVIDE (__data_end, .)
 
-.bss            0x00800142       0x5a
-                0x00800142                PROVIDE (__bss_start, .)
+.bss            0x0080013e       0x2a
+                0x0080013e                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
- .bss.flag.2458
-                0x00800142        0x2 Grilla/grilla.o
+ .bss.pos.2454  0x0080013e        0x2 Grilla/grilla.o
+ .bss.flag.2453
+                0x00800140        0x2 Grilla/grilla.o
  .bss.presionado
-                0x00800144        0x2 main.o
- .bss.linea     0x00800146        0x2 main.o
+                0x00800142        0x2 main.o
+ .bss.linea     0x00800144        0x2 main.o
  .bss.cacheMemIndexCol
-                0x00800148        0x2 ST7735/st7735.o
-                0x00800148                cacheMemIndexCol
+                0x00800146        0x2 ST7735/st7735.o
+                0x00800146                cacheMemIndexCol
  .bss.cacheMemIndexRow
-                0x0080014a        0x2 ST7735/st7735.o
-                0x0080014a                cacheMemIndexRow
+                0x00800148        0x2 ST7735/st7735.o
+                0x00800148                cacheMemIndexRow
  *(COMMON)
- COMMON         0x0080014c       0x50 Grilla/grilla.o
-                0x0080014c                old_string3a
-                0x00800156                old_string1
-                0x0080016a                old_string2b
-                0x00800174                old_string1b
-                0x0080017e                old_string2a
-                0x00800188                old_string3b
-                0x00800192                old_string4
-                0x0080019c                PROVIDE (__bss_end, .)
-                0x00001176                __data_load_start = LOADADDR (.data)
-                0x000011b8                __data_load_end = (__data_load_start + SIZEOF (.data))
+ COMMON         0x0080014a       0x1e Grilla/grilla.o
+                0x0080014a                old_string1
+                0x0080015e                old_string4
+                0x00800168                PROVIDE (__bss_end, .)
+                0x0000114e                __data_load_start = LOADADDR (.data)
+                0x0000118c                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x0080019c        0x0
+.noinit         0x00800168        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
-                0x0080019c                _end = .
+                0x00800168                _end = .
                 [!provide]                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
@@ -645,62 +634,62 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x1d2d
+.debug_info     0x00000000     0x1c9b
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x5f4 D:/Programs/Atmel Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega328p/avr5/crtatmega328p.o
- .debug_info    0x000005f4      0x220 Grilla/grilla.o
- .debug_info    0x00000814      0x41a main.o
- .debug_info    0x00000c2e      0x1ec SPI/SPI.o
- .debug_info    0x00000e1a      0xcd1 ST7735/st7735.o
- .debug_info    0x00001aeb      0x242 teclado.o
+ .debug_info    0x000005f4      0x1d1 Grilla/grilla.o
+ .debug_info    0x000007c5      0x3b6 main.o
+ .debug_info    0x00000b7b      0x1ec SPI/SPI.o
+ .debug_info    0x00000d67      0xcd1 ST7735/st7735.o
+ .debug_info    0x00001a38      0x263 teclado.o
 
-.debug_abbrev   0x00000000      0xce6
+.debug_abbrev   0x00000000      0xcd8
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x5a2 D:/Programs/Atmel Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega328p/avr5/crtatmega328p.o
- .debug_abbrev  0x000005a2       0xf2 Grilla/grilla.o
- .debug_abbrev  0x00000694      0x142 main.o
- .debug_abbrev  0x000007d6      0x15c SPI/SPI.o
- .debug_abbrev  0x00000932      0x246 ST7735/st7735.o
- .debug_abbrev  0x00000b78      0x16e teclado.o
+ .debug_abbrev  0x000005a2       0xe4 Grilla/grilla.o
+ .debug_abbrev  0x00000686      0x142 main.o
+ .debug_abbrev  0x000007c8      0x15c SPI/SPI.o
+ .debug_abbrev  0x00000924      0x246 ST7735/st7735.o
+ .debug_abbrev  0x00000b6a      0x16e teclado.o
 
-.debug_line     0x00000000      0xf25
+.debug_line     0x00000000      0xedb
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x133 D:/Programs/Atmel Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega328p/avr5/crtatmega328p.o
- .debug_line    0x00000133       0xe6 Grilla/grilla.o
- .debug_line    0x00000219      0x2e6 main.o
- .debug_line    0x000004ff      0x1d2 SPI/SPI.o
- .debug_line    0x000006d1      0x688 ST7735/st7735.o
- .debug_line    0x00000d59      0x1cc teclado.o
+ .debug_line    0x00000133       0xa2 Grilla/grilla.o
+ .debug_line    0x000001d5      0x2c2 main.o
+ .debug_line    0x00000497      0x1d2 SPI/SPI.o
+ .debug_line    0x00000669      0x688 ST7735/st7735.o
+ .debug_line    0x00000cf1      0x1ea teclado.o
 
-.debug_frame    0x00000000      0x4cc
+.debug_frame    0x00000000      0x4a4
  *(.debug_frame)
- .debug_frame   0x00000000       0x54 Grilla/grilla.o
- .debug_frame   0x00000054       0xd4 main.o
- .debug_frame   0x00000128       0x64 SPI/SPI.o
- .debug_frame   0x0000018c      0x2a0 ST7735/st7735.o
- .debug_frame   0x0000042c       0xa0 teclado.o
+ .debug_frame   0x00000000       0x2c Grilla/grilla.o
+ .debug_frame   0x0000002c       0xd4 main.o
+ .debug_frame   0x00000100       0x64 SPI/SPI.o
+ .debug_frame   0x00000164      0x2a0 ST7735/st7735.o
+ .debug_frame   0x00000404       0xa0 teclado.o
 
-.debug_str      0x00000000      0x73e
+.debug_str      0x00000000      0x6f0
  *(.debug_str)
  .debug_str     0x00000000      0x208 D:/Programs/Atmel Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega328p/avr5/crtatmega328p.o
- .debug_str     0x00000208      0x205 Grilla/grilla.o
-                                0x23e (size before relaxing)
- .debug_str     0x0000040d       0xe4 main.o
-                                0x299 (size before relaxing)
- .debug_str     0x000004f1       0x57 SPI/SPI.o
+ .debug_str     0x00000208      0x1b6 Grilla/grilla.o
+                                0x1ef (size before relaxing)
+ .debug_str     0x000003be       0xe4 main.o
+                                0x288 (size before relaxing)
+ .debug_str     0x000004a2       0x57 SPI/SPI.o
                                 0x237 (size before relaxing)
- .debug_str     0x00000548      0x1ad ST7735/st7735.o
+ .debug_str     0x000004f9      0x1a6 ST7735/st7735.o
                                 0x400 (size before relaxing)
- .debug_str     0x000006f5       0x49 teclado.o
-                                0x234 (size before relaxing)
+ .debug_str     0x0000069f       0x51 teclado.o
+                                0x23f (size before relaxing)
 
-.debug_loc      0x00000000     0x1835
+.debug_loc      0x00000000     0x1797
  *(.debug_loc)
- .debug_loc     0x00000000       0xec Grilla/grilla.o
- .debug_loc     0x000000ec      0x2f6 main.o
- .debug_loc     0x000003e2       0xaf SPI/SPI.o
- .debug_loc     0x00000491     0x1243 ST7735/st7735.o
- .debug_loc     0x000016d4      0x161 teclado.o
+ .debug_loc     0x00000000       0x4e Grilla/grilla.o
+ .debug_loc     0x0000004e      0x2f6 main.o
+ .debug_loc     0x00000344       0xaf SPI/SPI.o
+ .debug_loc     0x000003f3     0x1243 ST7735/st7735.o
+ .debug_loc     0x00001636      0x161 teclado.o
 
 .debug_macinfo
  *(.debug_macinfo)

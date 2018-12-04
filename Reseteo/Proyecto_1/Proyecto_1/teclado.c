@@ -7,6 +7,7 @@
 
 #include "teclado.h"
 #include <avr/io.h>
+#include "Grilla/grilla.h"
 
 
 void tecladoInit(void)
@@ -38,7 +39,7 @@ void mostrar(int presionado) //interpretacion de seleccion, mapea input
 	//presionado es el input
 	//mapear presionado con respectiva entrada en entradas
 	//cambiar orden en este string segun se necesite
-	char entradas[31] = "m123456789.+-*/^qlesctgxpofa0dn=";
+	char entradas[31] = "m123456789a+-*/^qlesctgxpo0.fdn=";
 	char ent = entradas[presionado];
 	//calculadora(entrada); //le pasa la entrada a la calculadora
 	
@@ -46,6 +47,8 @@ void mostrar(int presionado) //interpretacion de seleccion, mapea input
 	//MOSTRAR PRESIONADO POR USART (por ahora)
 	char str[2];
 	sprintf(str, "%d", presionado);
+	first_grid(ent);
+	
 	USART_Transmit_String(str);
 	USART_Transmit_String(" -> ");
 	USART_Transmit_char(ent);

@@ -9,7 +9,8 @@ teclado.d teclado.o: .././teclado.c .././teclado.h \
  d:\programs\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\common.h \
  d:\programs\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\version.h \
  d:\programs\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\fuse.h \
- d:\programs\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\lock.h
+ d:\programs\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\lock.h \
+ .././Grilla/grilla.h
 
 .././teclado.h:
 
@@ -34,3 +35,5 @@ d:\programs\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\
 d:\programs\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\fuse.h:
 
 d:\programs\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\lock.h:
+
+.././Grilla/grilla.h:

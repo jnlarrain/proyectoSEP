@@ -9,8 +9,7 @@
 #ifndef GRID_H_
 #define GRID_H_
 
-char transform(int number);
-void first_grid(float number);
+void first_grid(char number);
 
 
 #endif /* GRID_H_ */

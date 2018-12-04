@@ -10,7 +10,7 @@
 #include <util/delay.h>
 #include <avr/interrupt.h>
 #include "teclado.h"
-#include "Grilla/grilla.h"
+//#include "Grilla/grilla.h"
 #include "ST7735/st7735.h"
 #include "SPI/SPI.h"
 
@@ -73,12 +73,8 @@ int main(void)
 	SetPosition(25, 5);
 	DrawString("Inicio programa", 0x0000, X2);
 	_delay_ms(10000);
+	ClearScreen(0xffff);	
 	SetPosition(25, 5);
-	DrawString("Inicio programa", 0xffff, X2);
-	
-	ClearScreen(0xffff);
-	
-	first_grid(11);
 	
 	
 	

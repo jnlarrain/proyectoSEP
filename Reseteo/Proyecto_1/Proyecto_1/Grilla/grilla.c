@@ -7,56 +7,26 @@
 #include <util/delay.h>
 #include "../ST7735/st7735.h"
 
-char old_string1[20];
-char old_string1b[10];
-char old_string2a[10];
-char old_string2b[10];
-char old_string3a[10];
-char old_string3b[10];
-char old_string4[10];
 
-// // recibe numero y lo pone en el cuadrante 1
-// void first_grid(float number){
-// 	static int flag;
-// 	if (flag==1){
-// 		SetPosition(25, 5);
-// 		DrawString(old_string1, 0xffff, X2);
-// 	}
-// 	
-// 	sprintf(old_string1, " %f", number);
-// 	
-// 	SetPosition(25, 5);	
-// 	DrawString(old_string1, 0x0000, X2);
-// 
-// 	flag = 1;
-// 	
-// }
+char old_string1[20];
+char old_string4[10];
 
 
 //recibe numero y lo pone en el cuadrante 1
-void first_grid(int number){
+void first_grid(char letter){
 	static int flag;
+	static int pos = 0;
 	if (flag==1){
 		SetPosition(25, 5);
 		DrawString(old_string1, 0xffff, X2);
+		strcat(old_string1,"");
+		SetPosition(25, 5);
+		pos = 0;
 	}
-	
-	int i;
+	old_string1[pos] = letter;
+	pos +=1;
 	SetPosition(25, 5);
-	while (number != 0){
-		char digit;
-		int aux;
-		aux = number % 10;
-		digit = transform(aux);
-		DrawString(digit, 0x0000, X2);
-	}	
+	DrawString(old_string1, 0x0000, X2);	
 	flag = 1;
-	
 }
 
-
-char transform(int number){
-	char digit[2]; 
-	sprintf(digit, " %d", number);
-	return digit;
-}
