@@ -22,11 +22,21 @@ static char operador = '+';
 int punto = 0;
 #define  pi 3
 
-#define neutro _delay_ms(1); PORTC |= (1 << PORTC0) | (1 << PORTC1); PORTD |= (1 << PORTD2) | (1 << PORTC3); 
-#define  p1  PORTC &= ~(1 << PORTC0); neutro linea = 0; 
-#define  p2  PORTC &= ~(1 << PORTC1); neutro linea = 8;   
-#define  p3  PORTD &= ~(1 << PORTD2); neutro linea = 16;  
-#define  p4  PORTD &= ~(1 << PORTD3); neutro linea = 24; 
+//barrido
+static int t = 0;
+#define neutro PORTC |= (1 << PORTC0) | (1 << PORTC1); PORTD |= (1 << PORTD2) | (1 << PORTC3); 
+#define  p1  PORTC &= ~(1 << PORTC0); linea = 0; 
+#define  p2  PORTC &= ~(1 << PORTC1); linea = 8;   
+#define  p3  PORTD &= ~(1 << PORTD2); linea = 16;  
+#define  p4  PORTD &= ~(1 << PORTD3); linea = 24;
+
+//debuoncing
+#define tref 20		//referencia debounciong en ms
+static int dx = 0;	     //coordenadas debouncer
+int deb = 0;      //debouncing activado
+static int tdeb = -1;     //tiempo debouncing
+static int estadoDeb = 1;   //status boton en cuention (1 estpera apriete, 2 apretado, 3 espera suelte)
+int modo = 1;
 
 #define  deboncer 10
 
@@ -82,27 +92,64 @@ unsigned char USART_Receive( void )
 //agregar bool ocupado para no accionar multiples veces interrupcion!
 ISR(PCINT2_vect) //seccion2 D
 {
-	//INICIO OCUPADO
-	//Debounder in
-	if      (!(PIND & (1<<PIND4))) { presionado = linea + 0;}
-	else if (!(PIND & (1<<PIND5))) { presionado = linea + 1;}
-	else if (!(PIND & (1<<PIND6))) { presionado = linea + 2;}
-	else if (!(PIND & (1<<PIND7))) { presionado = linea + 3;}
-	teclado();
-	//debounceer out
+	if(!deb){
+		if      (!(PIND & (1<<PIND4))) { presionado = linea + 0; dx = 0;}
+		else if (!(PIND & (1<<PIND5))) { presionado = linea + 1; dx = 1;}
+		else if (!(PIND & (1<<PIND6))) { presionado = linea + 2; dx = 2;}
+		else if (!(PIND & (1<<PIND7))) { presionado = linea + 3; dx = 3;}
+		deb = 1;
+		tdeb = tref;}
 }
 
 ISR(PCINT1_vect) //seccion1 C
 {
-	//INICIO OCUPADO
-	//debouncer in
-	if      (!(PINC & (1<<PINC2))) { presionado = linea + 4;}
-	else if (!(PINC & (1<<PINC3))) { presionado = linea + 5;}
-	else if (!(PINC & (1<<PINC4))) { presionado = linea + 6;}
-	else if (!(PINC & (1<<PINC5))) { presionado = linea + 7;}
-	teclado();
-	//debouncer out
+	if(!deb){
+		if      (!(PINC & (1<<PINC2))) { presionado = linea + 4; dx = 4;}
+		else if (!(PINC & (1<<PINC3))) { presionado = linea + 5; dx = 5;}
+		else if (!(PINC & (1<<PINC4))) { presionado = linea + 6; dx = 6;}
+		else if (!(PINC & (1<<PINC5))) { presionado = linea + 7; dx = 7;}
+		deb = 1;
+		tdeb = tref;}
 }
+
+ISR(TIMER2_COMPA_vect) { //timer cada 1ms
+	if (tdeb > 0)
+	{
+		tdeb--;
+	}
+	
+	t++;
+	if (t == 8)
+	{
+		t = 0;
+	}
+	//barrido
+	if((t == 1)||(t == 3)||(t == 5)||(t == 7))	{ neutro }
+	else{
+		switch(t){
+			case 0: p1 break;
+			case 2: p2 break;
+			case 4: p3 break;
+			case 6: p4 break;
+		}
+	}
+}
+
+int boton() //entrega status del ultimo boton
+{
+	int bot = 0;
+	switch(dx){
+		case 0: bot = (!(PIND & (1<<PIND4))); break;
+		case 1: bot = (!(PIND & (1<<PIND5))); break;
+		case 2: bot = (!(PIND & (1<<PIND6))); break;
+		case 3: bot = (!(PIND & (1<<PIND7))); break;
+		case 4: bot = (!(PINC & (1<<PINC2))); break;
+		case 5: bot = (!(PINC & (1<<PINC3))); break;
+		case 6: bot = (!(PINC & (1<<PINC4))); break;
+		case 7: bot = (!(PINC & (1<<PINC5))); break; }
+	return bot;
+}
+
 
 void teclado(void) //interpretacion de seleccion, mapea input
 {
@@ -123,189 +170,6 @@ void teclado(void) //interpretacion de seleccion, mapea input
 	USART_Transmit_char('\n');
 }
 
-
-
-
-
-void mostrarNumero(float num) //mustra el numero
-{
-	char str[6];
-	sprintf(str, "%d", num);
-	USART_Transmit_String(str);
-	USART_Transmit_char('\n');
-}
-
-void calculadora(char entrada) //basado en diagrama estados calculadora
-{
-	switch (estado)
-	{
-		case 0: //estado 0
-		if((entrada == '0')||
-		   (entrada == '1')||
-		   (entrada == '2')||
-		   (entrada == '3')||
-		   (entrada == '4')||
-		   (entrada == '5')||
-		   (entrada == '6')||
-		   (entrada == '7')||
-		   (entrada == '8')||
-		   (entrada == '9')||
-		   (entrada == '.')) { actualizarNumero(N1,entrada); estado = 0;}
-		else if ((entrada == '+')||
-				 (entrada == '-')||
-				 (entrada == '*')||
-				 (entrada == '/')||
-				 (entrada == '^')) {operador = entrada;	USART_Transmit_char(operador);		estado = 1;}
-		else if ((entrada == 'q')||
-				 (entrada == 'l')||
-				 (entrada == 'e')||
-				 (entrada == 's')||
-				 (entrada == 'c')||
-				 (entrada == 't')||
-				 (entrada == 'g')||
-				 (entrada == 'x')) {calcular1(N1,entrada);		estado = 3;}
-		else{
-			switch (entrada){
-				case 'p': N1 = pi;						estado = 3; break;
-				case 'm': N1 = M; N2 = 0;				estado = 3; break;
-				case 'd': M = M + N1; N1 = 0; N2 = 0;	estado = 0; break;
-				case 'n': M = M - N1; N1 = 0; N2 = 0;	estado = 0; break;
-				case 'a': M = 0;  N1 = 0; N2 = 0;	    estado = 1; break;
-				//case 'f': //terminar calculadora
-			}
-		}break;
-		
-		case 1: //estado 1
-		punto = 0;
-		if((entrada == '0')||
-			(entrada == '1')||
-			(entrada == '2')||
-			(entrada == '3')||
-			(entrada == '4')||
-			(entrada == '5')||
-			(entrada == '6')||
-			(entrada == '7')||
-			(entrada == '8')||
-			(entrada == '9')||
-			(entrada == '.')) { N2 = 0; actualizarNumero(N2,entrada); estado = 2;}
-		else if ((entrada == '+')||
-				(entrada == '-')||
-				(entrada == '*')||
-				(entrada == '/')||
-				(entrada == '^')) {operador = entrada;	USART_Transmit_char(operador);		estado = 1;}
-		else if ((entrada == 'q')||
-				(entrada == 'l')||
-				(entrada == 'e')||
-				(entrada == 's')||
-				(entrada == 'c')||
-				(entrada == 't')||
-				(entrada == 'g')||
-				(entrada == 'x')||
-				(entrada == 'm')||
-				(entrada == 'd')||
-				(entrada == 'n')) {	estado = 4;} //error
-		else{
-			switch (entrada){
-				case 'p': N2 = pi;	calcular2(N1,N2,operador);	estado = 3; break;
-				case 'a': M = 0;  N1 = 0; N2 = 0; punto = 0;    estado = 0; break;
-				case '=': M = 0;  calcular2(N1,N1,operador);    estado = 0; break;
-				//case 'f': //terminar calculadora
-			}
-		}
-		break;
-		
-		case 2: //estado 2
-		if((entrada == '0')||
-			(entrada == '1')||
-			(entrada == '2')||
-			(entrada == '3')||
-			(entrada == '4')||
-			(entrada == '5')||
-			(entrada == '6')||
-			(entrada == '7')||
-			(entrada == '8')||
-			(entrada == '9')||
-			(entrada == '.')) { actualizarNumero(N2,entrada); estado = 2;}
-		else if ((entrada == '+')||
-			(entrada == '-')||
-			(entrada == '*')||
-			(entrada == '/')||
-			(entrada == '^')) { calcular2(N1,N2,operador); operador = entrada; USART_Transmit_char(operador); estado = 1;}
-		else if ((entrada == 'q')||
-			(entrada == 'l')||
-			(entrada == 'e')||
-			(entrada == 's')||
-			(entrada == 'c')||
-			(entrada == 't')||
-			(entrada == 'g')||
-			(entrada == 'x')) {calcular2(N1,N2,operador); calcular1(N1,entrada); estado = 3;}
-		else{
-			switch (entrada){
-				case 'p': N2 = pi;	calcular2(N1,N2,operador);	estado = 3; break;
-				case 'a': M = 0;  N1 = 0; N2 = 0; punto = 0;    estado = 0; break;
-				case '=': M = 0;  calcular2(N1,N2,operador);    estado = 3; break;
-				case 'm': N1 = M; N2 = 0;						estado = 3; break;
-				case 'd': calcular2(N1,N2,operador); M = M + N1; N1 = 0; N2 = 0;	estado = 0; break;
-				case 'n': calcular2(N1,N2,operador); M = M - N1; N1 = 0; N2 = 0;	estado = 0; break;
-				//case 'f': //terminar calculadora
-			}
-		}
-		break;
-		
-		case 3: //estado 3
-		punto = 0;
-		if((entrada == '0')||
-		(entrada == '1')||
-		(entrada == '2')||
-		(entrada == '3')||
-		(entrada == '4')||
-		(entrada == '5')||
-		(entrada == '6')||
-		(entrada == '7')||
-		(entrada == '8')||
-		(entrada == '9')||
-		(entrada == '.')) { N1 = 0; actualizarNumero(N1,entrada); estado = 0;}
-		else if ((entrada == '+')||
-		(entrada == '-')||
-		(entrada == '*')||
-		(entrada == '/')||
-		(entrada == '^')) {operador = entrada;	USART_Transmit_char(operador);		estado = 1;}
-		else if ((entrada == 'q')||
-		(entrada == 'l')||
-		(entrada == 'e')||
-		(entrada == 's')||
-		(entrada == 'c')||
-		(entrada == 't')||
-		(entrada == 'g')||
-		(entrada == 'x')) {calcular1(N1,entrada);		estado = 3;}
-		else{
-			switch (entrada){
-				case 'p': N1 = pi;							estado = 3; break;
-				case 'm': N1 = M; N2 = 0;					estado = 3; break;
-				case 'd': M = M + N1; N1 = 0; N2 = 0;		estado = 0; break;
-				case 'n': M = M - N1; N1 = 0; N2 = 0;		estado = 0; break;
-				case 'a': M = 0;  N1 = 0; N2 = 0; punto = 0; estado = 1; break;
-				//case 'f': //terminar calculadora
-			}
-		}
-		break;
-		
-		case 4: //estado 4
-		if ((entrada == 'o')||(entrada == 'a'))
-		{
-			M = 0;  N1 = 0; N2 = 0; estado = 0; punto = 0;
-		}
-		else if ((entrada == 'f'))
-		{
-			//fin
-		}
-		else{
-			USART_Transmit_String("Error\n"); //error
-		}
-		break;
-	}
-	
-}
 
 
 int main(void)
@@ -330,6 +194,21 @@ int main(void)
 	PCMSK2 |= 0xF0; //PD4,5,6,7
 	PCICR |= (1<<PCIE1) | (1<<PCIE2);   //interrupts de cambio habilitados
 	
+	//seteoTimmer2
+	
+	TCCR2A = 0;
+	TCCR2B = 0;
+	TCNT2 = 0;
+
+	// 1000 Hz (16000000/((124+1)*128))
+	OCR2A = 124;
+	// CTC
+	TCCR2A |= (1 << WGM21);
+	// Prescaler 128
+	TCCR2B |= (1 << CS22) | (1 << CS20);
+	// Output Compare Match A Interrupt Enable
+	TIMSK2 |= (1 << OCIE2A);
+	
 	USART_Init(MYUBRR);
 	USART_Transmit_String("HOLA");
 	
@@ -337,13 +216,6 @@ int main(void)
 	
     while (1) 
     {
-		p1
-		p2
-		p3
-		p4
-		//para test por usar comentar p1, p2, p3 y p4
-// 		char entrada = USART_Receive();
-// 		calculadora(entrada);
-    }
+	}
 }
 
