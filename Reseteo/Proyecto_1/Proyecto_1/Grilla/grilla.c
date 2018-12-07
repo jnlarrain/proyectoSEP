@@ -75,18 +75,18 @@ void thrid_grid(char letter[10]){
 
 
 void fourth_grid(char letter){
-	if (letter=='a'){
+		if (letter=='a'){
 		SetPosition(15, 45);
-		DrawString(old_string4, 0xffff, X2);		
+		DrawChar(letter, 0xffff, X2);	
 		old_string4 = ' ';
-	}
-	else{
+		}
+		else{
 		SetPosition(15, 45);
-		DrawString(old_string4, 0xffff, X2);
+		DrawChar(letter, 0xffff, X2);
 		old_string4 = letter;
 		SetPosition(15, 45);
-		DrawString(old_string4, 0x0000, X2);
-	}
+		DrawChar(letter, 0x0000, X2);
+		}
 }
 
 

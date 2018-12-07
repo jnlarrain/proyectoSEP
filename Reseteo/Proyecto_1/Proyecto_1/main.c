@@ -14,24 +14,21 @@
 static float N1 = 0;
 static float N2 = 0;
 static float M = 0;
-static char operador = '+';
-static unsigned int estado = 0;
+char operador = '+';
+int estado = 0;
 int punto = 0;
 int contadorPunto = 0;
 #define  pi 3.14159 //buscar pi con 5 digitos
-
 int ovfe = 0;
 
-
+//actualizacion pantalla
 static char salida[10];
-
 char pantalla1[10] = "";
 char pantalla2[10] = "";
 char pantalla3 =  ' ';
 char pantalla4[10] = "";
 
 static unsigned int presionado;
-#define  pi 3
 static unsigned int linea;
 
 //debuoncing
@@ -155,6 +152,12 @@ void teclado(void) //interpretacion de seleccion, mapea input
 	//MOSTRAR PRESIONADO POR USART (por ahora)
 	char str[2];
 	calculadora(ent);
+	if (ent == 'o'){
+		ClearScreen(0xffff);
+	}
+	else if(ent == 'f') {
+		ClearScreen(0x0000);
+	}
 	sprintf(str, "%d", presionado);
 	USART_Transmit_String(str);
 	USART_Transmit_String(" -> ");
@@ -171,20 +174,17 @@ void mostrar(int posicion)
 	int ver = 1;
 	switch(posicion)
 	{
-		case 1: strcpy(pantalla1,floatToString(N1,salida)); break;
-		case 3: pantalla3 = operador; break;
-		case 2: strcpy(pantalla2,floatToString(N2,salida)); break;
-		case 4: strcpy(pantalla4,floatToString(N1,salida)); break;
 		case 0: //limpiamos //0 limpia la pantalla!
-		strcpy(pantalla1,"         ");
+		//strcpy(pantalla1,"         ");
 		strcpy(pantalla2,"         ");
 		pantalla3 = ' ';
 		strcpy(pantalla4,"         ");
 		ver = 0; break;
-		case 5: //pantalla negra
-		strcpy(pantalla1,"pantalla");
-		strcpy(pantalla1,"negra");
-		break;
+		case 1: floatToString(N1,salida);strcpy(pantalla1,salida); break;
+		case 2: floatToString(N2,salida);strcpy(pantalla2,salida); break;
+		case 3: pantalla3 = operador; break;		
+		case 4: floatToString(N1,salida);strcpy(pantalla4,salida); break;		
+		case 5: ClearScreen(0x0000);break;
 		case 6: //error
 		strcpy(pantalla1,"Error");
 		break;
@@ -192,11 +192,10 @@ void mostrar(int posicion)
 	if(ver)
 	{
 		//actualizar pantalla con respectivos strings aca [borrar estos Serial.println(), son de arduino]
-	first_grid(pantalla1);
-	second_grid(pantalla2);
-	thrid_grid(pantalla4);
-	//fourth_grid(pantalla3);
-	}
+	
+	if(pantalla1!= "         ") {first_grid(pantalla1);} second_grid(pantalla2); thrid_grid(pantalla4);fourth_grid(pantalla3);
+	
+}
 }
 
 void floatToString(float numero, char* str) //recibe un float y el string donde guardar

@@ -107,12 +107,6 @@ char DrawChar(char, uint16_t, ESizes);
 
 void DrawString(char*, uint16_t, ESizes);
 
-char DrawLine(uint8_t, uint8_t, uint8_t, uint8_t, uint16_t);
-
-void DrawLineHorizontal(uint8_t, uint8_t, uint8_t, uint16_t);
-
-void DrawLineVertical(uint8_t, uint8_t, uint8_t, uint16_t);
-
 void ClearScreen(uint16_t);
 
 void UpdateScreen(void);
