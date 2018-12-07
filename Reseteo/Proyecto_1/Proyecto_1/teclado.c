@@ -31,31 +31,23 @@ void tecladoInit(void)
 	PCMSK1 |= 0x3C; //PC2,3,4,5
 	PCMSK2 |= 0xF0; //PD4,5,6,7
 	PCICR |= (1<<PCIE1) | (1<<PCIE2);   //interrupts de cambio habilitados
+	
+	//seteoTimmer2
+	
+	TCCR2A = 0;
+	TCCR2B = 0;
+	TCNT2 = 0;
+
+	// 1000 Hz (16000000/((124+1)*128))
+	OCR2A = 124;
+	// CTC
+	TCCR2A |= (1 << WGM21);
+	// Prescaler 128
+	TCCR2B |= (1 << CS22) | (1 << CS20);
+	// Output Compare Match A Interrupt Enable
+	TIMSK2 |= (1 << OCIE2A);
 }
 
-
-void mostrar(int presionado) //interpretacion de seleccion, mapea input
-{
-	//presionado es el input
-	//mapear presionado con respectiva entrada en entradas
-	//cambiar orden en este string segun se necesite
-	char entradas[31] = "m123456789a+-*/^qlesctgxpo0.fdn=";
-	char ent = entradas[presionado];
-	//calculadora(entrada); //le pasa la entrada a la calculadora
-	
-	//FIN OCUPADO
-	//MOSTRAR PRESIONADO POR USART (por ahora)
-	char str[2];
-	sprintf(str, "%d", presionado);
-	first_grid(ent);
-	
-	USART_Transmit_String(str);
-	USART_Transmit_String(" -> ");
-	USART_Transmit_char(ent);
-	USART_Transmit_char('\n');
-	}
-	
-	
 
 void USART_Transmit_char( unsigned char data )
 {
@@ -66,7 +58,8 @@ void USART_Transmit_char( unsigned char data )
 	UDR0 = data;
 }
 
-void USART_Transmit_String(char* StringPtr){
+void USART_Transmit_String(char* StringPtr)
+{
 	while(*StringPtr != 0x00){
 		USART_Transmit_char(*StringPtr);
 		StringPtr++;

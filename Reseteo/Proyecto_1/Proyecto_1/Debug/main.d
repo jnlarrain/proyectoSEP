@@ -17,7 +17,8 @@ main.d main.o: .././main.c \
  d:\programs\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h \
  d:\programs\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h \
  d:\programs\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\interrupt.h \
- .././teclado.h .././ST7735/st7735.h \
+ d:\programs\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\string.h \
+ .././teclado.h .././Grilla/grilla.h .././ST7735/st7735.h \
  d:\programs\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\pgmspace.h \
  .././SPI/SPI.h
 
@@ -57,7 +58,11 @@ d:\programs\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math
 
 d:\programs\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\interrupt.h:
 
+d:\programs\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\string.h:
+
 .././teclado.h:
+
+.././Grilla/grilla.h:
 
 .././ST7735/st7735.h:
 
